@@ -1,0 +1,61 @@
+:root {
+  /* Cores da Marca */
+  --color-primary: #CC0000;
+  --color-primary-dark: #A80000;
+
+  /* Neutros */
+  --color-dark: #1A1A1A;
+  --color-dark-mid: #3C3C3C;
+  --color-surface: #F4F4F4;
+  --color-white: #FFFFFF;
+
+  /* Tipografia */
+  --font-family-base: Arial, 'Helvetica Neue', Helvetica, sans-serif;
+
+  /* Contêiner e Bordas */
+  --container-max-width: 1140px;
+  --border-radius: 0px;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-family-base);
+  background-color: var(--color-surface);
+  color: var(--color-dark-mid);
+}
+
+/* Header Corporativo */
+.navbar {
+  background-color: var(--color-dark);
+  color: var(--color-white);
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: 15px 0;
+}
+
+.container {
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Botões */
+.btn-primary {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  border: none;
+  border-radius: var(--border-radius);
+  padding: 10px 24px;
+  font-weight: 700;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  background-color: var(--color-primary-dark);
+}
