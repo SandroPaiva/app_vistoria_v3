@@ -14,7 +14,7 @@
         </div>
         
         <?php if (isset($error)): ?>
-            <div style="background: rgba(220, 53, 69, 0.1); color: var(--danger-color); padding: 10px; border-radius: 8px; margin-bottom: 1rem; text-align: center;">
+            <div style="background: rgba(211, 47, 47, 0.1); color: var(--color-danger); padding: 12px; border-radius: var(--radius-sm); margin-bottom: 1.5rem; text-align: center; font-weight: 500; font-size: 13px;">
                 <?= $error ?>
             </div>
         <?php endif; ?>

@@ -18,6 +18,9 @@ spl_autoload_register(function ($class) {
 // Load Router
 require_php_files(APP_PATH . '/Core');
 
+// Carregar variáveis de ambiente (.env)
+\app\Core\Env::load(BASE_PATH . '/.env');
+
 // Helper para requerir arquivos
 function require_php_files($dir) {
     if (!is_dir($dir)) return;
@@ -51,24 +54,41 @@ $router->get('/dashboard', 'DashboardController@index');
 $router->get('/vistorias', 'VistoriaController@index');
 $router->get('/vistorias/nova', 'VistoriaController@create');
 $router->post('/vistorias/store', 'VistoriaController@store');
+$router->get('/vistorias/iniciar/{id}', 'VistoriaController@startScheduled');
 $router->get('/vistorias/executar/{id}', 'VistoriaController@execute');
 $router->post('/vistorias/salvar_etapa', 'VistoriaController@saveStep');
 $router->get('/vistorias/pdf/{id}', 'VistoriaController@pdf');
+$router->get('/vistorias/cancelar/{id}', 'VistoriaController@cancel');
 
 // Usuarios
 $router->get('/usuarios', 'UsuarioController@index');
 $router->get('/usuarios/novo', 'UsuarioController@create');
 $router->post('/usuarios/store', 'UsuarioController@store');
+$router->get('/usuarios/editar/{id}', 'UsuarioController@edit');
+$router->post('/usuarios/update', 'UsuarioController@update');
+$router->get('/usuarios/desativar/{id}', 'UsuarioController@deactivate');
+$router->get('/usuarios/ativar/{id}', 'UsuarioController@activate');
 
 // Veiculos
 $router->get('/veiculos', 'VeiculoController@index');
 $router->get('/veiculos/novo', 'VeiculoController@create');
 $router->post('/veiculos/store', 'VeiculoController@store');
+$router->get('/veiculos/editar/{id}', 'VeiculoController@edit');
+$router->post('/veiculos/update', 'VeiculoController@update');
+$router->get('/veiculos/desativar/{id}', 'VeiculoController@deactivate');
+$router->get('/veiculos/ativar/{id}', 'VeiculoController@activate');
+$router->get('/veiculos/visualizar/{id}', 'VeiculoController@show');
+$router->get('/veiculos/novo-servico/{id}', 'VeiculoController@novoServicoForm');
+$router->post('/veiculos/novo-servico', 'VeiculoController@storeNovoServico');
 
 // Itens de Reparo
 $router->get('/itens', 'ItemController@index');
 $router->get('/itens/novo', 'ItemController@create');
 $router->post('/itens/store', 'ItemController@store');
+$router->get('/itens/editar/{id}', 'ItemController@edit');
+$router->post('/itens/update', 'ItemController@update');
+$router->get('/itens/desativar/{id}', 'ItemController@deactivate');
+$router->get('/itens/ativar/{id}', 'ItemController@activate');
 
 // Dispatch
 $url = isset($_GET['url']) ? $_GET['url'] : (isset($_SERVER['PATH_INFO']) ? $_SERVER['PATH_INFO'] : '/');

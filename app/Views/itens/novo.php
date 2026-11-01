@@ -1,12 +1,12 @@
 <div class="panel">
     <div style="margin-bottom: 1.5rem;">
         <h3 style="color: var(--color-dark); margin: 0;">Cadastrar Novo Item</h3>
-        <p style="color: var(--color-mid); font-size: 13px;">Preencha os dados do catálogo de reparo oferecido.</p>
+        <p style="color: var(--color-mid); font-size: 13px;">Preencha os dados do catálogo de serviço oferecido.</p>
     </div>
 
     <form action="<?= BASE_URL ?>/itens/store" method="POST">
         <div class="form-group">
-            <label class="form-label" for="tipo_reparo">Tipo de Reparo *</label>
+            <label class="form-label" for="tipo_reparo">Tipo de Serviço *</label>
             <select name="tipo_reparo" id="tipo_reparo" class="form-control" required>
                 <option value="">Selecione...</option>
                 <option value="Reparo de rachaduras">Reparo de rachaduras</option>

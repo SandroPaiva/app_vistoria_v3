@@ -1,9 +1,10 @@
 <div class="panel">
     <div style="margin-bottom: 1.5rem; display: flex; justify-content: space-between; align-items: center;">
         <div>
-            <h3 style="color: var(--color-dark); margin: 0;">Execução de Reparo</h3>
+            <h3 style="color: var(--color-dark); margin: 0;">Execução de Serviço</h3>
             <p style="color: var(--color-mid); font-size: 13px;">Veículo: <strong><?= htmlspecialchars($vistoria['fabricante'] . ' ' . $vistoria['modelo'] . ' - ' . $vistoria['placa']) ?></strong></p>
             <p style="color: var(--color-mid); font-size: 13px;">Item Alvo: <strong><?= htmlspecialchars($vistoria['tipo_reparo'] ?? 'Não especificado') ?> - <?= htmlspecialchars($vistoria['classificacao_vidro'] ?? '') ?></strong></p>
+            <p style="color: var(--color-mid); font-size: 13px;">Cliente: <strong><?= htmlspecialchars($vistoria['nome_proprietario'] ?? 'Não informado') ?></strong><?= !empty($vistoria['telefone_proprietario']) ? ' | Tel: <strong>' . htmlspecialchars($vistoria['telefone_proprietario']) . '</strong>' : '' ?></p>
         </div>
         <span class="badge" style="background: var(--color-warning); font-size: 14px; padding: 8px 12px;">Em Andamento</span>
     </div>
@@ -15,7 +16,7 @@
         <input type="hidden" name="longitude" id="longitude">
         <input type="hidden" name="assinatura_digital" id="assinatura_digital" value="<?= htmlspecialchars($vistoria['assinatura_digital'] ?? '') ?>">
 
-        <h4 style="border-bottom: 1px solid var(--color-border); padding-bottom: 10px; margin-top: 20px;">1. Fotografias Pré-Reparo</h4>
+        <h4 style="border-bottom: 1px solid var(--color-border); padding-bottom: 10px; margin-top: 20px;">1. Fotografias Pré-Serviço</h4>
         <p style="font-size: 12px; color: var(--color-mid); margin-bottom: 10px;">Obrigatório: Mínimo de 5, Máximo de 10.</p>
         <div class="form-group photo-manager" data-name="pre_reparo" data-min="5" data-max="10">
             <input type="file" id="file_pre_reparo" class="photo-input" multiple accept="image/*" style="display:none;">
@@ -28,7 +29,7 @@
         <h4 style="border-bottom: 1px solid var(--color-border); padding-bottom: 10px; margin-top: 30px;">2. Fotografias do Item Específico</h4>
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
             <div class="form-group photo-manager" data-name="item_antes" data-min="1" data-max="5">
-                <label class="form-label">Item ANTES do reparo *</label>
+                <label class="form-label">Item ANTES do serviço *</label>
                 <input type="file" id="file_item_antes" class="photo-input" multiple accept="image/*" style="display:none;">
                 <label for="file_item_antes" class="btn btn-secondary btn-add-photo" style="display: inline-block; cursor: pointer; text-align: center;">
                     <i class="fa-solid fa-camera"></i> Adicionar Foto
@@ -36,7 +37,7 @@
                 <div class="photo-preview-container" style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px;"></div>
             </div>
             <div class="form-group photo-manager" data-name="item_depois" data-min="1" data-max="5">
-                <label class="form-label">Item DEPOIS do reparo *</label>
+                <label class="form-label">Item DEPOIS do serviço *</label>
                 <input type="file" id="file_item_depois" class="photo-input" multiple accept="image/*" style="display:none;">
                 <label for="file_item_depois" class="btn btn-secondary btn-add-photo" style="display: inline-block; cursor: pointer; text-align: center;">
                     <i class="fa-solid fa-camera"></i> Adicionar Foto
@@ -45,13 +46,13 @@
             </div>
         </div>
 
-        <h4 style="border-bottom: 1px solid var(--color-border); padding-bottom: 10px; margin-top: 30px;">3. Dados Técnicos do Reparo</h4>
+        <h4 style="border-bottom: 1px solid var(--color-border); padding-bottom: 10px; margin-top: 30px;">3. Dados Técnicos do Serviço</h4>
         <div class="form-group">
             <label class="form-label" for="dados_reparo">Descrição dos materiais e observações:</label>
             <textarea name="dados_reparo" id="dados_reparo" class="form-control" rows="5" required><?= htmlspecialchars($vistoria['dados_reparo'] ?? '') ?></textarea>
         </div>
 
-        <h4 style="border-bottom: 1px solid var(--color-border); padding-bottom: 10px; margin-top: 30px;">4. Fotografias Pós-Reparo</h4>
+        <h4 style="border-bottom: 1px solid var(--color-border); padding-bottom: 10px; margin-top: 30px;">4. Fotografias Pós-Serviço</h4>
         <p style="font-size: 12px; color: var(--color-mid); margin-bottom: 10px;">Obrigatório: Mínimo de 5, Máximo de 10.</p>
         <div class="form-group photo-manager" data-name="pos_reparo" data-min="5" data-max="10">
             <input type="file" id="file_pos_reparo" class="photo-input" multiple accept="image/*" style="display:none;">
@@ -70,7 +71,7 @@
         </div>
         
         <div class="form-group">
-            <button type="button" class="btn btn-primary" id="btnOpenSignature" style="background-color: var(--color-dark); margin-bottom: 15px;">
+            <button type="button" class="btn btn-dark" id="btnOpenSignature" style="margin-bottom: 15px;">
                 <i class="fa-solid fa-pen-nib"></i> Coletar Assinatura Digital
             </button>
             <div id="signaturePreviewContainer" style="display: <?= !empty($vistoria['assinatura_digital']) ? 'block' : 'none' ?>; border: 1px solid var(--color-border); padding: 10px; width: fit-content; margin-top: 10px;">
@@ -81,14 +82,17 @@
 
         <hr style="border: 0; border-top: 1px solid var(--color-border); margin: 30px 0;">
 
-        <div style="display: flex; gap: 15px;">
-            <button type="submit" name="finalizar" value="0" class="btn btn-primary" style="background-color: var(--color-dark);">
+        <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+            <button type="submit" name="finalizar" value="0" class="btn btn-dark">
                 <i class="fa-solid fa-save"></i> Salvar Rascunho
             </button>
             <button type="submit" name="finalizar" value="1" class="btn btn-success">
-                <i class="fa-solid fa-check"></i> Concluir Vistoria
+                <i class="fa-solid fa-check"></i> Concluir Serviço
             </button>
-            <a href="<?= BASE_URL ?>/vistorias" class="btn btn-secondary">Cancelar</a>
+            <button type="button" id="btnTriggerCancel" class="btn btn-danger">
+                <i class="fa-solid fa-ban"></i> Cancelar Serviço
+            </button>
+            <a href="<?= BASE_URL ?>/vistorias" class="btn btn-secondary">Voltar</a>
         </div>
     </form>
 </div>
@@ -107,6 +111,26 @@
             <button type="button" id="btnSavesignature" class="btn btn-success"><i class="fa-solid fa-check"></i> Salvar</button>
             <button type="button" id="btnClearSignature" class="btn btn-secondary"><i class="fa-solid fa-eraser"></i> Limpar</button>
             <button type="button" id="btnCloseSignature" class="btn btn-danger"><i class="fa-solid fa-times"></i> Fechar</button>
+        </div>
+    </div>
+</div>
+
+<!-- Modal de Cancelamento -->
+<div id="cancelModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 9999; justify-content: center; align-items: center; padding: 15px;">
+    <div style="background: white; padding: 25px; border-radius: 8px; width: 100%; max-width: 500px; box-shadow: var(--shadow-lg);">
+        <h3 style="margin: 0 0 10px 0; color: var(--color-dark); display: flex; align-items: center; gap: 10px;">
+            <i class="fa-solid fa-ban" style="color: var(--color-danger);"></i> Cancelar Serviço
+        </h3>
+        <p style="font-size: 13px; color: var(--color-mid); margin-bottom: 20px;">Por favor, informe o motivo do cancelamento deste serviço. Esta ação não poderá ser desfeita.</p>
+        
+        <div class="form-group" style="margin-bottom: 20px;">
+            <label class="form-label" for="motivo_cancelamento_input" style="font-weight: bold;">Motivo do Cancelamento *</label>
+            <textarea id="motivo_cancelamento_input" class="form-control" rows="4" placeholder="Digite aqui o motivo do cancelamento..." style="width: 100%; resize: vertical;" required></textarea>
+        </div>
+        
+        <div style="display: flex; gap: 15px; justify-content: flex-end;">
+            <button type="button" id="btnConfirmCancel" class="btn btn-danger">Confirmar</button>
+            <button type="button" id="btnDismissCancel" class="btn btn-secondary">Voltar</button>
         </div>
     </div>
 </div>
@@ -224,11 +248,11 @@
         
         if (submitterValue === "1") {
             if (fotosProcessadas['pre_reparo'].length < 5) {
-                alert("Você deve enviar no mínimo 5 fotos Pré-Reparo.");
+                alert("Você deve enviar no mínimo 5 fotos Pré-Serviço.");
                 e.preventDefault(); return;
             }
             if (fotosProcessadas['pos_reparo'].length < 5) {
-                alert("Você deve enviar no mínimo 5 fotos Pós-Reparo.");
+                alert("Você deve enviar no mínimo 5 fotos Pós-Serviço.");
                 e.preventDefault(); return;
             }
             if (fotosProcessadas['item_antes'].length < 1 || fotosProcessadas['item_depois'].length < 1) {
@@ -236,7 +260,7 @@
                 e.preventDefault(); return;
             }
             if (!document.getElementById('assinatura_digital').value) {
-                alert("A assinatura digital é obrigatória para concluir a vistoria.");
+                alert("A assinatura digital é obrigatória para concluir o serviço.");
                 e.preventDefault(); return;
             }
         }
@@ -342,4 +366,40 @@
     canvas.addEventListener('touchmove', draw, {passive: false});
     canvas.addEventListener('touchend', stopDrawing);
     canvas.addEventListener('touchcancel', stopDrawing);
+
+    // Cancel Modal Logic
+    const cancelModal = document.getElementById('cancelModal');
+    const btnTriggerCancel = document.getElementById('btnTriggerCancel');
+    const btnConfirmCancel = document.getElementById('btnConfirmCancel');
+    const btnDismissCancel = document.getElementById('btnDismissCancel');
+    const motivoInput = document.getElementById('motivo_cancelamento_input');
+
+    if (btnTriggerCancel) {
+        btnTriggerCancel.addEventListener('click', function() {
+            cancelModal.style.display = 'flex';
+            motivoInput.value = '';
+            motivoInput.focus();
+        });
+    }
+
+    if (btnDismissCancel) {
+        btnDismissCancel.addEventListener('click', function() {
+            cancelModal.style.display = 'none';
+        });
+    }
+
+    if (btnConfirmCancel) {
+        btnConfirmCancel.addEventListener('click', function() {
+            const motivo = motivoInput.value.trim();
+            if (!motivo) {
+                alert("Por favor, preencha o motivo do cancelamento.");
+                motivoInput.focus();
+                return;
+            }
+            
+            // Redirect to cancel route with query parameter
+            const id = "<?= $vistoria['id'] ?>";
+            window.location.href = '<?= BASE_URL ?>/vistorias/cancelar/' + id + '?motivo=' + encodeURIComponent(motivo);
+        });
+    }
 </script>

@@ -3,7 +3,7 @@
 namespace app\Controllers;
 
 use app\Core\Controller;
-use app\Core\Database;
+use app\Models\Usuario;
 
 class AuthController extends Controller {
     public function login() {
@@ -15,15 +15,10 @@ class AuthController extends Controller {
 
     public function authenticate() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $login = filter_input(INPUT_POST, 'login', FILTER_SANITIZE_STRING);
-            $senha = $_POST['senha'];
+            $login = trim($_POST['login'] ?? '');
+            $senha = $_POST['senha'] ?? '';
 
-            $db = Database::getInstance()->getConnection();
-            $stmt = $db->prepare("SELECT * FROM usuarios WHERE login = :login LIMIT 1");
-            $stmt->bindValue(':login', $login);
-            $stmt->execute();
-
-            $user = $stmt->fetch();
+            $user = Usuario::findByLogin($login);
 
             if ($user && password_verify($senha, $user['senha_hash'])) {
                 $_SESSION['user_id'] = $user['id'];

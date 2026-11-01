@@ -1,9 +1,9 @@
 <?php
 
 return [
-    'host' => 'localhost',
-    'dbname' => 'pilkington_vistoria',
-    'user' => 'root', // adjust if needed
-    'password' => 'Paiva@351522', // adjust if needed
-    'charset' => 'utf8mb4'
+    'host' => getenv('DB_HOST') ?: ($_ENV['DB_HOST'] ?? 'localhost'),
+    'dbname' => getenv('DB_NAME') ?: ($_ENV['DB_NAME'] ?? 'pilkington_vistoria'),
+    'user' => getenv('DB_USER') ?: ($_ENV['DB_USER'] ?? 'sandropaiva'),
+    'password' => getenv('DB_PASS') ?: ($_ENV['DB_PASS'] ?? 'Sandro@123'),
+    'charset' => getenv('DB_CHARSET') ?: ($_ENV['DB_CHARSET'] ?? 'utf8mb4')
 ];

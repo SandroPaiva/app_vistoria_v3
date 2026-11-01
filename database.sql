@@ -8,6 +8,7 @@ CREATE TABLE IF NOT EXISTS usuarios (
     login VARCHAR(100) NOT NULL UNIQUE,
     senha_hash VARCHAR(255) NOT NULL,
     perfil_acesso ENUM('Administrador', 'Gerente', 'Supervisor', 'Técnico') NOT NULL,
+    ativo TINYINT(1) DEFAULT 1,
     data_criacao DATETIME DEFAULT CURRENT_TIMESTAMP,
     data_alteracao DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
@@ -17,6 +18,7 @@ CREATE TABLE IF NOT EXISTS itens_reparo (
     tipo_reparo ENUM('Reparo de rachaduras', 'Troca completa') NOT NULL,
     classificacao_vidro ENUM('Para-brisa', 'Porta Dianteira Esquerda', 'Porta Dianteira Direita', 'Porta Traseira Esquerda', 'Porta Traseira Direita', 'Vigia', 'Lanternas', 'Faróis', 'Espelhos', 'Outros') NOT NULL,
     especificacao_outros VARCHAR(255),
+    ativo TINYINT(1) DEFAULT 1,
     data_criacao DATETIME DEFAULT CURRENT_TIMESTAMP,
     data_alteracao DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
@@ -32,22 +34,30 @@ CREATE TABLE IF NOT EXISTS veiculos (
     nome_proprietario VARCHAR(255),
     telefone_proprietario VARCHAR(50),
     item_reparo_id INT,
+    data_agendamento DATETIME,
+    tecnico_agendado_id INT,
+    ativo TINYINT(1) DEFAULT 1,
     data_criacao DATETIME DEFAULT CURRENT_TIMESTAMP,
     data_alteracao DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    FOREIGN KEY (item_reparo_id) REFERENCES itens_reparo(id) ON DELETE SET NULL
+    FOREIGN KEY (item_reparo_id) REFERENCES itens_reparo(id) ON DELETE SET NULL,
+    FOREIGN KEY (tecnico_agendado_id) REFERENCES usuarios(id) ON DELETE SET NULL
 );
 
 CREATE TABLE IF NOT EXISTS vistorias (
     id INT AUTO_INCREMENT PRIMARY KEY,
     veiculo_id INT NOT NULL,
     tecnico_id INT NOT NULL,
+    data_agendamento DATETIME,
     data_inicio DATETIME DEFAULT CURRENT_TIMESTAMP,
     data_fim DATETIME,
-    status ENUM('Em Andamento', 'Concluído', 'Cancelado') DEFAULT 'Em Andamento',
+    status ENUM('Agendado', 'Em Andamento', 'Concluído', 'Cancelado') DEFAULT 'Em Andamento',
+    motivo_servico VARCHAR(50) DEFAULT 'Primeiro Serviço',
+    observacao_motivo TEXT,
     dados_reparo TEXT,
     latitude DECIMAL(10, 8),
     longitude DECIMAL(11, 8),
     assinatura_digital LONGTEXT,
+    motivo_cancelamento TEXT,
     data_criacao DATETIME DEFAULT CURRENT_TIMESTAMP,
     data_alteracao DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     FOREIGN KEY (veiculo_id) REFERENCES veiculos(id),

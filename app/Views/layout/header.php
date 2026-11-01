@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pilkington - Sistema de Vistoria</title>
+    <title>Pilkington - Sistema de Serviços</title>
     <link rel="stylesheet" href="<?= BASE_URL ?>/assets/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -19,14 +19,14 @@
                     <i class="fa-solid fa-chart-pie"></i> Dashboard
                 </a>
                 <a href="<?= BASE_URL ?>/vistorias" class="nav-link <?= strpos($_SERVER['REQUEST_URI'], '/vistorias') !== false ? 'active' : '' ?>">
-                    <i class="fa-solid fa-clipboard-list"></i> Vistorias
+                    <i class="fa-solid fa-clipboard-list"></i> Serviços
                 </a>
                 <?php if (isset($_SESSION['user_profile']) && in_array($_SESSION['user_profile'], ['Administrador', 'Gerente', 'Supervisor'])): ?>
                 <a href="<?= BASE_URL ?>/veiculos" class="nav-link <?= strpos($_SERVER['REQUEST_URI'], '/veiculos') !== false ? 'active' : '' ?>">
                     <i class="fa-solid fa-car"></i> Veículos
                 </a>
                 <a href="<?= BASE_URL ?>/itens" class="nav-link <?= strpos($_SERVER['REQUEST_URI'], '/itens') !== false ? 'active' : '' ?>">
-                    <i class="fa-solid fa-tools"></i> Itens de Reparo
+                    <i class="fa-solid fa-tools"></i> Itens de Serviço
                 </a>
                 <?php endif; ?>
                 <?php if (isset($_SESSION['user_profile']) && in_array($_SESSION['user_profile'], ['Administrador', 'Gerente'])): ?>
@@ -34,7 +34,7 @@
                     <i class="fa-solid fa-users"></i> Usuários
                 </a>
                 <?php endif; ?>
-                <a href="<?= BASE_URL ?>/logout" class="nav-link" style="margin-top: auto; background: rgba(220, 53, 69, 0.2);">
+                <a href="<?= BASE_URL ?>/logout" class="nav-link logout-link" style="margin-top: auto;">
                     <i class="fa-solid fa-sign-out-alt"></i> Sair
                 </a>
             </nav>

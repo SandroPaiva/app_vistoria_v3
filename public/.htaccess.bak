@@ -1,0 +1,13 @@
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]
+
+<IfModule mod_php.c>
+    php_value post_max_size 128M
+    php_value upload_max_filesize 128M
+</IfModule>
+<IfModule mod_php8.c>
+    php_value post_max_size 128M
+    php_value upload_max_filesize 128M
+</IfModule>

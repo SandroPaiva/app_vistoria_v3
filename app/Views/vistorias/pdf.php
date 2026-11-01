@@ -5,10 +5,10 @@
     <title><?= htmlspecialchars($pageTitle) ?></title>
     <style>
         :root {
-            --pilkington-red: #CC0000;
-            --dark: #1A1A1A;
-            --mid: #666666;
-            --light: #F4F4F4;
+            --pilkington-green: #075E54;
+            --dark: #111111;
+            --mid: #4A4A4A;
+            --light: #F7F8F8;
         }
         
         body {
@@ -33,13 +33,13 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 2px solid var(--pilkington-red);
+            border-bottom: 2px solid var(--pilkington-green);
             padding-bottom: 10px;
             margin-bottom: 20px;
         }
 
         .header h1 {
-            color: var(--pilkington-red);
+            color: var(--pilkington-green);
             margin: 0;
             font-size: 24pt;
         }
@@ -55,7 +55,7 @@
             padding: 5px 10px;
             font-weight: bold;
             font-size: 14pt;
-            border-left: 4px solid var(--pilkington-red);
+            border-left: 4px solid var(--pilkington-green);
             margin-top: 20px;
             margin-bottom: 10px;
         }
@@ -140,10 +140,10 @@
         <div class="header">
             <div>
                 <h1>Pilkington</h1>
-                <p style="margin: 0; font-size: 12pt; color: var(--mid);">Relatório de Vistoria e Reparo</p>
+                <p style="margin: 0; font-size: 12pt; color: var(--mid);">Relatório de Serviço</p>
             </div>
             <div class="doc-info">
-                Vistoria ID: <strong>#<?= str_pad($vistoria['id'], 5, '0', STR_PAD_LEFT) ?></strong><br>
+                Serviço ID: <strong>#<?= str_pad($vistoria['id'], 5, '0', STR_PAD_LEFT) ?></strong><br>
                 Data Início: <?= date('d/m/Y H:i', strtotime($vistoria['data_inicio'])) ?><br>
                 Data Conclusão: <?= $vistoria['data_fim'] ? date('d/m/Y H:i', strtotime($vistoria['data_fim'])) : 'Em Andamento' ?>
             </div>
@@ -170,8 +170,8 @@
             </tr>
         </table>
 
-        <!-- DADOS DO REPARO -->
-        <div class="section-title">Dados do Reparo</div>
+        <!-- DADOS DO SERVIÇO -->
+        <div class="section-title">Dados do Serviço</div>
         <table>
             <tr>
                 <th>Tipo de Serviço</th>
@@ -218,24 +218,24 @@
         <!-- QUEBRA DE PÁGINA PARA FOTOS GERAIS -->
         <div class="page-break"></div>
 
-        <div class="section-title">Fotografias Pré-Reparo (Estado Inicial do Veículo)</div>
+        <div class="section-title">Fotografias Pré-Serviço (Estado Inicial do Veículo)</div>
         <div class="photo-grid">
-            <?php if (empty($fotos['Pre-Reparo'])) echo "<p>Nenhuma foto pré-reparo anexada.</p>"; ?>
+            <?php if (empty($fotos['Pre-Reparo'])) echo "<p>Nenhuma foto pré-serviço anexada.</p>"; ?>
             <?php foreach ($fotos['Pre-Reparo'] as $i => $f): ?>
                 <div class="photo-card">
-                    <img src="<?= BASE_URL . $f['caminho_arquivo'] ?>" alt="Pré-Reparo">
-                    <p>Pré-Reparo - Foto <?= $i + 1 ?></p>
+                    <img src="<?= BASE_URL . $f['caminho_arquivo'] ?>" alt="Pré-Serviço">
+                    <p>Pré-Serviço - Foto <?= $i + 1 ?></p>
                 </div>
             <?php endforeach; ?>
         </div>
 
-        <div class="section-title">Fotografias Pós-Reparo (Estado Final do Veículo)</div>
+        <div class="section-title">Fotografias Pós-Serviço (Estado Final do Veículo)</div>
         <div class="photo-grid">
-            <?php if (empty($fotos['Pos-Reparo'])) echo "<p>Nenhuma foto pós-reparo anexada.</p>"; ?>
+            <?php if (empty($fotos['Pos-Reparo'])) echo "<p>Nenhuma foto pós-serviço anexada.</p>"; ?>
             <?php foreach ($fotos['Pos-Reparo'] as $i => $f): ?>
                 <div class="photo-card">
-                    <img src="<?= BASE_URL . $f['caminho_arquivo'] ?>" alt="Pós-Reparo">
-                    <p>Pós-Reparo - Foto <?= $i + 1 ?></p>
+                    <img src="<?= BASE_URL . $f['caminho_arquivo'] ?>" alt="Pós-Serviço">
+                    <p>Pós-Serviço - Foto <?= $i + 1 ?></p>
                 </div>
             <?php endforeach; ?>
         </div>
@@ -244,7 +244,7 @@
         <div class="page-break"></div>
         <div class="section-title">Termo de Aceite e Assinatura</div>
         <p style="font-size: 11pt; text-align: justify;">
-            Declaro, para os devidos fins, que o serviço especificado neste relatório foi executado conforme os padrões de qualidade e segurança estabelecidos pela Pilkington. O veículo foi entregue e inspecionado após o reparo/troca dos itens listados acima.
+            Declaro, para os devidos fins, que o serviço especificado neste relatório foi executado conforme os padrões de qualidade e segurança estabelecidos pela Pilkington. O veículo foi entregue e inspecionado após o serviço/troca dos itens listados acima.
         </p>
 
         <div class="signature-box">
