@@ -119,4 +119,16 @@ class Usuario extends Model {
         $stmt = $db->prepare("UPDATE usuarios SET ativo = 1 WHERE id = :id");
         return $stmt->execute([':id' => $id]);
     }
+
+    public static function updateName(int $id, string $newName): bool {
+        $db = self::getDb();
+        $stmt = $db->prepare("UPDATE usuarios SET nome_completo = :nome, data_alteracao = NOW() WHERE id = :id");
+        return $stmt->execute([':nome' => $newName, ':id' => $id]);
+    }
+
+    public static function updatePassword(int $id, string $newPasswordHash): bool {
+        $db = self::getDb();
+        $stmt = $db->prepare("UPDATE usuarios SET senha_hash = :senha, data_alteracao = NOW() WHERE id = :id");
+        return $stmt->execute([':senha' => $newPasswordHash, ':id' => $id]);
+    }
 }

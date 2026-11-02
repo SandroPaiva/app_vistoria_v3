@@ -44,7 +44,86 @@
         <main class="main-content">
             <header class="top-header">
                 <h2 class="page-title"><?= isset($pageTitle) ? $pageTitle : 'Dashboard' ?></h2>
-                <div class="user-profile">
-                    <span><i class="fa-solid fa-user-circle"></i> <?= $_SESSION['user_name'] ?? 'Usuário' ?></span>
+                
+                <!-- Menu Dropdown do Usuário Logado -->
+                <div class="user-menu-container" id="userMenuContainer">
+                    <button type="button" class="user-profile-trigger" id="userMenuTrigger" aria-expanded="false" aria-haspopup="true" title="Opções da Conta">
+                        <i class="fa-solid fa-circle-user avatar-icon"></i>
+                        <span class="user-display-name"><?= htmlspecialchars($_SESSION['user_name'] ?? 'Usuário') ?></span>
+                        <i class="fa-solid fa-chevron-down chevron-icon"></i>
+                    </button>
+
+                    <div class="user-dropdown-menu" id="userDropdownMenu">
+                        <div class="dropdown-header">
+                            <strong class="user-name"><?= htmlspecialchars($_SESSION['user_name'] ?? 'Usuário') ?></strong>
+                            <small class="user-role"><i class="fa-solid fa-id-badge"></i> <?= htmlspecialchars($_SESSION['user_profile'] ?? 'Operador') ?></small>
+                        </div>
+                        <div class="dropdown-divider"></div>
+                        <a href="<?= BASE_URL ?>/perfil" class="dropdown-item">
+                            <i class="fa-solid fa-id-badge"></i>
+                            <span>Ver Perfil</span>
+                        </a>
+                        <a href="<?= BASE_URL ?>/perfil/senha" class="dropdown-item">
+                            <i class="fa-solid fa-key"></i>
+                            <span>Trocar Senha</span>
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a href="<?= BASE_URL ?>/logout" class="dropdown-item item-logout">
+                            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                            <span>Sair</span>
+                        </a>
+                    </div>
                 </div>
             </header>
+
+            <!-- Alertas Globais (Flash Messages) -->
+            <?php if (!empty($_SESSION['flash_success'])): ?>
+                <div class="alert alert-success" style="background: rgba(46, 125, 50, 0.12); color: var(--color-success); padding: 12px 18px; border-radius: var(--radius-md); border-left: 4px solid var(--color-success); margin-bottom: 1.5rem; display: flex; align-items: center; justify-content: space-between; font-size: 13px; font-weight: 500;">
+                    <div><i class="fa-solid fa-circle-check"></i> <?= htmlspecialchars($_SESSION['flash_success']) ?></div>
+                    <button type="button" onclick="this.parentElement.remove()" style="background: none; border: none; color: inherit; cursor: pointer; font-size: 16px;">&times;</button>
+                </div>
+                <?php unset($_SESSION['flash_success']); ?>
+            <?php endif; ?>
+
+            <?php if (!empty($_SESSION['flash_error'])): ?>
+                <div class="alert alert-danger" style="background: rgba(211, 47, 47, 0.12); color: var(--color-danger); padding: 12px 18px; border-radius: var(--radius-md); border-left: 4px solid var(--color-danger); margin-bottom: 1.5rem; display: flex; align-items: center; justify-content: space-between; font-size: 13px; font-weight: 500;">
+                    <div><i class="fa-solid fa-circle-exclamation"></i> <?= htmlspecialchars($_SESSION['flash_error']) ?></div>
+                    <button type="button" onclick="this.parentElement.remove()" style="background: none; border: none; color: inherit; cursor: pointer; font-size: 16px;">&times;</button>
+                </div>
+                <?php unset($_SESSION['flash_error']); ?>
+            <?php endif; ?>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const trigger = document.getElementById('userMenuTrigger');
+    const menu = document.getElementById('userDropdownMenu');
+
+    if (trigger && menu) {
+        trigger.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const isOpen = menu.classList.contains('show');
+            if (isOpen) {
+                menu.classList.remove('show');
+                trigger.setAttribute('aria-expanded', 'false');
+            } else {
+                menu.classList.add('show');
+                trigger.setAttribute('aria-expanded', 'true');
+            }
+        });
+
+        document.addEventListener('click', function(e) {
+            if (!menu.contains(e.target) && !trigger.contains(e.target)) {
+                menu.classList.remove('show');
+                trigger.setAttribute('aria-expanded', 'false');
+            }
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && menu.classList.contains('show')) {
+                menu.classList.remove('show');
+                trigger.setAttribute('aria-expanded', 'false');
+            }
+        });
+    }
+});
+</script>

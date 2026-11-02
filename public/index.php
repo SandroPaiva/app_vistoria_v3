@@ -47,6 +47,12 @@ $router->get('/login', 'AuthController@login');
 $router->post('/login', 'AuthController@authenticate');
 $router->get('/logout', 'AuthController@logout');
 
+// Perfil e Troca de Senha
+$router->get('/perfil', 'PerfilController@index');
+$router->post('/perfil/nome', 'PerfilController@updateNome');
+$router->get('/perfil/senha', 'PerfilController@senha');
+$router->post('/perfil/senha', 'PerfilController@updateSenha');
+
 // Dashboard Routes
 $router->get('/dashboard', 'DashboardController@index');
 

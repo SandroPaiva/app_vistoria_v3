@@ -70,6 +70,13 @@ Injetado globalmente em todas as tabelas `.table` do sistema:
 *   **Ordenação Bidirecional:** Clique nos cabeçalhos de coluna para ordenar (1º clique ASC, 2º clique DESC), com ícones visuais (`fa-sort`, `fa-sort-up`, `fa-sort-down`), suporte ao formato de data brasileiro (`dd/mm/yyyy hh:mm`), valores numéricos e textos acentuados.
 *   **Contador Dinâmico:** Exibe a quantidade de registros visíveis em relação ao total.
 
+### 9. Perfil do Usuário, Troca de Senha e Menu Superior (`PerfilController`)
+*   **Menu Dropdown no Cabeçalho:** Gatilho interativo no nome do usuário logado (superior direito) com as opções:
+    *   **Ver Perfil (`/perfil`):** Exibe todos os dados da conta (login, email, perfil, status, datas) e permite alterar o nome próprio (`nome_completo`) com atualização imediata da sessão.
+    *   **Trocar Senha (`/perfil/senha`):** Formulário seguro que exige a **senha atual** para autorização e a **nova senha inserida duas vezes** com validação de coincidência em tempo real.
+    *   **Sair (`/logout`):** Logoff seguro do sistema.
+*   **Barra Lateral Fixa:** Sidebar configurada com `position: fixed` no desktop, garantindo que o menu permaneça estático enquanto apenas o conteúdo central rola verticalmente.
+
 ---
 
 ## 🐛 Histórico de Problemas Encontrados e Soluções (Troubleshooting)
@@ -87,6 +94,9 @@ Injetado globalmente em todas as tabelas `.table` do sistema:
 *   **Problema 6: Controle de Agendamentos, Múltiplos Serviços por Veículo e Visão do Técnico**
     *   *Cenário:* Veículos que precisavam de novo atendimento ou refação não podiam ser atendidos sem perder o histórico anterior, o perfil de técnico tinha acesso a telas de cadastro desnecessárias, e não havia visão de escala diária e mensal.
     *   *Correção:* Auto-migração do schema MySQL para inclusão de status `Agendado`, `data_agendamento`, `motivo_servico` e `observacao_motivo`. Criação da funcionalidade de agendamento no cadastro/edição de veículos, formulário específico de "Novo Serviço / Refazer", dossiê de histórico (`/veiculos/visualizar/{id}`), calendário interativo mensal com navegação dia/mês/ano no Dashboard e adaptação do primeiro indicador para "Serviços Realizados" na visão do Técnico.
+*   **Problema 7: Troca de Senha pelo Próprio Usuário, Menu Dropdown e Barra Lateral Fixa**
+    *   *Cenário:* Os usuários não tinham autonomia para alterar sua senha ou nome sem solicitar ao administrador, o menu superior era estático e a barra lateral rolava junto com o conteúdo da página em telas compridas.
+    *   *Correção:* Criação do `PerfilController`, rotas `/perfil` e `/perfil/senha` com validação de senha atual e dupla confirmação de nova senha, menu suspenso interativo no cabeçalho e fixação estrutural da `.sidebar` via CSS (`position: fixed`) com rolagem independente do `.main-content`.
 
 ---
 
