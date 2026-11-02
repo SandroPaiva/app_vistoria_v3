@@ -1,6 +1,6 @@
 <div class="panel">
     <div style="margin-bottom: 1.5rem;">
-        <h3 style="color: var(--color-dark); margin: 0;">Cadastrar Novo Item</h3>
+        <h3 style="margin: 0;">Cadastrar Novo Item</h3>
         <p style="color: var(--color-mid); font-size: 13px;">Preencha os dados do catálogo de serviço oferecido.</p>
     </div>
 

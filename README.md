@@ -14,7 +14,7 @@ O projeto prioriza alta performance, manutenibilidade e controle total do códig
 *   **Variáveis de Ambiente (`.env`):** Gerenciador de configuração nativo (`app/Core/Env.php`), isolando credenciais do banco de dados e protegido no `.gitignore`.
 *   **MySQL & PDO:** Banco de dados relacional acessado via Prepared Statements para total prevenção de SQL Injection.
 *   **JavaScript (Vanilla & `table-tools.js`):** Interatividade dinâmica no front-end: compressão de fotos antes do upload, geolocalização via API do navegador, assinatura digital via HTML5 `<canvas>`, calendário mensal interativo e filtros/ordenação universais em todas as tabelas.
-*   **CSS3 (Design System Pilkington):** Estilização baseada nas diretrizes corporativas da Pilkington (Verde Pilkington `#075E54`, Cinza Carvão `#1A1A1A`, Superfície `#F7F8F8`, tipografia corporativa e microinterações com cantos arredondados).
+*   **CSS3 (Design System Pilkington V3):** Estilização baseada na paleta verde corporativa (Verde Base `#035A38`, Verde Profundo `#013320`, Verde Destaque `#61CE70`, Superfície `#F7F8F8`), com eliminação total de fundos pretos, regras adaptativas de contraste para botões, tipografia limpa e indicadores de status circulares simplificados.
 *   **FontAwesome (CDN):** Ícones padronizados para menus, ações, badges e indicadores de ordenação de colunas.
 
 ---
@@ -39,12 +39,13 @@ O projeto prioriza alta performance, manutenibilidade e controle total do códig
 
 ### 3. Gestão de Usuários (`UsuarioController`)
 *   Cadastro e controle hierárquico de operadores da oficina e campo.
-*   Colunas **Ativo** (badges visuais `Ativo` / `Inativo`) e **Data Alteração** para auditoria de ações.
-*   Ação de **Reativação** para usuários inativos e dropdown de status no formulário de edição.
+*   Colunas **Ativo** (indicadores circulares simplificados com ícones de *check* e *x*) e **Data Alteração** para auditoria de ações.
+*   Ação de **Reativação** para usuários inativos (estilizada em verde `#61CE70`) e dropdown de status no formulário de edição.
 
 ### 4. Gestão de Veículos & Histórico (`VeiculoController`)
 *   **Agendamento no Cadastro e Edição:** Permite definir dia/hora (`datetime-local`) e técnico responsável. No cadastro, gera automaticamente o serviço com status `Agendado`.
-*   **Novo Serviço / Refazer:** Para veículos que já possuem histórico de atendimentos, disponibiliza formulário específico exigindo a seleção do **Motivo** (`Novo Serviço` ou `Refazer`) e **Observação Complementar Obrigatória**, gerando um novo registro vinculado ao histórico do veículo.
+*   **Novo Serviço / Refazer:** Para veículos que já possuem histórico de atendimentos, disponibiliza ação com botão compacto **"Novo"**, exigindo a seleção do **Motivo** (`Novo Serviço` ou `Refazer`) e **Observação Complementar Obrigatória**, gerando um novo registro vinculado ao histórico do veículo.
+*   **Ação de Histórico:** Ação rápida exibindo exclusivamente o ícone de **Olho** (`fa-eye`).
 *   **Coluna "Tipo de Serviço":** Identifica rapidamente o item de reparo e classificação do vidro no catálogo.
 *   **Dossiê do Veículo (`/veiculos/visualizar/{id}`):**
     *   Painel com dados completos do veículo e proprietário.
@@ -52,7 +53,7 @@ O projeto prioriza alta performance, manutenibilidade e controle total do códig
     *   Tabela com o **Histórico Completo de Serviços** com status, técnico, motivo, observação e link para laudos em PDF.
 
 ### 5. Gestão de Itens de Reparo (`ItemController`)
-*   Catálogo dos serviços oferecidos pela unidade (ex: Parabrisa, Farol, Vidro Lateral) e classificação técnica. Suporte a inativação e reativação.
+*   Catálogo dos serviços oferecidos pela unidade (ex: Parabrisa, Farol, Vidro Lateral) e classificação técnica. Suporte a inativação e reativação (`#61CE70`).
 
 ### 6. Execução de Vistorias e Atendimentos (`VistoriaController`)
 *   **Filtro Restrito de Veículo Alvo:** A criação avulsa (`/vistorias/nova`) restringe a seleção exclusivamente a veículos sem nenhum serviço prévio registrado (excluindo os em andamento, cancelados ou concluídos).
@@ -66,7 +67,7 @@ O projeto prioriza alta performance, manutenibilidade e controle total do códig
 ### 8. Ferramentas Universais de Listagem (`table-tools.js`)
 Injetado globalmente em todas as tabelas `.table` do sistema:
 *   **Busca em Tempo Real:** Filtra simultaneamente o texto digitado em todas as colunas.
-*   **Filtro "Ativo: SIM" por Padrão:** Inicia selecionado nas tabelas que possuem coluna de status, permitindo alternar para *"Ativo: NÃO"* ou *"Status: TODOS"*.
+*   **Filtro "Ativo: SIM" por Padrão:** Inicia selecionado nas tabelas que possuem coluna de status, reconhecendo tanto badges quanto os novos indicadores circulares (`.status-circle`), permitindo alternar para *"Ativo: NÃO"* ou *"Status: TODOS"*.
 *   **Ordenação Bidirecional:** Clique nos cabeçalhos de coluna para ordenar (1º clique ASC, 2º clique DESC), com ícones visuais (`fa-sort`, `fa-sort-up`, `fa-sort-down`), suporte ao formato de data brasileiro (`dd/mm/yyyy hh:mm`), valores numéricos e textos acentuados.
 *   **Contador Dinâmico:** Exibe a quantidade de registros visíveis em relação ao total.
 
@@ -82,7 +83,7 @@ Injetado globalmente em todas as tabelas `.table` do sistema:
 ## 🐛 Histórico de Problemas Encontrados e Soluções (Troubleshooting)
 
 *   **Problema 1: Layout Genérico fora de Padrão**
-    *   *Correção:* Reescrevemos o `style.css` aplicando a paleta oficial da Pilkington (Verde `#075E54`, Cinza Carvão `#1A1A1A`), tipografia limpa, cantos arredondados e sombras suaves.
+    *   *Correção:* Reescrevemos o `style.css` aplicando a paleta oficial da Pilkington, tipografia limpa, cantos arredondados e sombras suaves.
 *   **Problema 2: Falha no Login de Administrador**
     *   *Correção:* Geração de hash seguro via `password_hash('admin123', PASSWORD_BCRYPT)` no PHP 8 e atualização no banco e no script `database.sql`.
 *   **Problema 3: Vistorias não Salvavam Fotos (Limite de Upload PHP)**
@@ -97,6 +98,14 @@ Injetado globalmente em todas as tabelas `.table` do sistema:
 *   **Problema 7: Troca de Senha pelo Próprio Usuário, Menu Dropdown e Barra Lateral Fixa**
     *   *Cenário:* Os usuários não tinham autonomia para alterar sua senha ou nome sem solicitar ao administrador, o menu superior era estático e a barra lateral rolava junto com o conteúdo da página em telas compridas.
     *   *Correção:* Criação do `PerfilController`, rotas `/perfil` e `/perfil/senha` com validação de senha atual e dupla confirmação de nova senha, menu suspenso interativo no cabeçalho e fixação estrutural da `.sidebar` via CSS (`position: fixed`) com rolagem independente do `.main-content`.
+*   **Problema 8: Modernização da Identidade Visual, Regras de Contraste e Simplificação de Ações**
+    *   *Cenário:* Havia elementos em preto e cinza carvão no fundo da barra lateral, cabeçalhos com pouca diferenciação cromática e botões/ações em tabelas com excesso de texto descritivo.
+    *   *Correção:* 
+        1. Remoção completa de tons pretos em planos de fundo, substituídos por gradientes e variações da cor `#035A38` (Verde Corporativo: `#035A38`, `#024229`, `#013320`).
+        2. Aplicação da cor `#61CE70` em todos os cabeçalhos de coluna (`th`) e títulos de nível H1 a H3.
+        3. Regra de contraste para botões: fundo `#61CE70` com texto `#FFFFFF` sobre superfícies brancas/claras; e fundo `#FFFFFF` com texto `#61CE70` sobre superfícies escuras.
+        4. Indicadores de status circulares simplificados: círculo `#61CE70` com check branco para Ativo; círculo `#7A7A7A` com x branco para Inativo.
+        5. Ação de Histórico compactada apenas para o ícone de Olho (`fa-eye`), botão de novo serviço renomeado para "Novo", botão Reativar padronizado em `#61CE70` (`btn-reativar`) e botão Desativar mantido em alerta.
 
 ---
 

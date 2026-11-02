@@ -1,7 +1,7 @@
 <div class="panel">
     <div style="margin-bottom: 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
         <div>
-            <h3 style="color: var(--color-dark); margin: 0; display: flex; align-items: center; gap: 10px;">
+            <h3 style="margin: 0; display: flex; align-items: center; gap: 10px;">
                 <i class="fa-solid fa-car"></i> Veículo: <?= htmlspecialchars($veiculo['placa']) ?>
             </h3>
             <p style="color: var(--color-mid); font-size: 13px; margin: 4px 0 0 0;">
@@ -10,8 +10,8 @@
         </div>
         <div style="display: flex; gap: 10px;">
             <?php if (isset($_SESSION['user_profile']) && in_array($_SESSION['user_profile'], ['Administrador', 'Gerente', 'Supervisor'])): ?>
-                <a href="<?= BASE_URL ?>/veiculos/novo-servico/<?= $veiculo['id'] ?>" class="btn btn-primary" style="padding: 8px 16px; font-size: 12px; background: var(--color-primary-light);">
-                    <i class="fa-solid fa-rotate-right"></i> Novo Serviço / Refazer
+                <a href="<?= BASE_URL ?>/veiculos/novo-servico/<?= $veiculo['id'] ?>" class="btn btn-primary" style="padding: 8px 16px; font-size: 12px;" title="Novo Serviço">
+                    <i class="fa-solid fa-plus"></i> Novo
                 </a>
                 <a href="<?= BASE_URL ?>/veiculos/editar/<?= $veiculo['id'] ?>" class="btn btn-secondary" style="padding: 8px 16px; font-size: 12px;">
                     <i class="fa-solid fa-edit"></i> Editar
@@ -46,10 +46,10 @@
                 <strong>Item de Serviço Associado:</strong> 
                 <?= $veiculo['item_reparo_id'] ? htmlspecialchars($veiculo['tipo_reparo'] . ' - ' . $veiculo['classificacao_vidro']) : 'Nenhum' ?>
             </p>
-            <p style="margin-bottom: 0; font-size: 13px;">
+            <p style="margin-bottom: 0; font-size: 13px; display: flex; align-items: center; gap: 8px;">
                 <strong>Status do Cadastro:</strong>
-                <span class="badge" style="background: <?= $veiculo['ativo'] == 1 ? 'var(--color-success)' : 'var(--color-mid)' ?>;">
-                    <?= $veiculo['ativo'] == 1 ? 'Ativo' : 'Inativo' ?>
+                <span class="status-circle <?= $veiculo['ativo'] == 1 ? 'status-active' : 'status-inactive' ?>" title="<?= $veiculo['ativo'] == 1 ? 'Ativo' : 'Inativo' ?>" data-status="<?= $veiculo['ativo'] == 1 ? 'ativo' : 'inativo' ?>">
+                    <i class="fa-solid <?= $veiculo['ativo'] == 1 ? 'fa-check' : 'fa-xmark' ?>"></i>
                 </span>
             </p>
         </div>

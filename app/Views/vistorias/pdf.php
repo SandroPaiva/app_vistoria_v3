@@ -5,8 +5,8 @@
     <title><?= htmlspecialchars($pageTitle) ?></title>
     <style>
         :root {
-            --pilkington-green: #075E54;
-            --dark: #111111;
+            --pilkington-green: #035A38;
+            --dark: #024229;
             --mid: #4A4A4A;
             --light: #F7F8F8;
         }

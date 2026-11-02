@@ -4,7 +4,7 @@
         
         <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--color-border); padding-bottom: 1rem; margin-bottom: 1.5rem;">
             <div>
-                <h3 style="margin: 0; color: var(--color-primary-dark); font-size: 1.25rem; display: flex; align-items: center; gap: 8px;">
+                <h3 style="margin: 0; font-size: 1.25rem; display: flex; align-items: center; gap: 8px;">
                     <i class="fa-solid fa-key text-primary"></i> Trocar Senha de Acesso
                 </h3>
                 <small style="color: var(--color-mid); font-size: 12px; margin-top: 4px; display: block;">
@@ -16,7 +16,7 @@
             </a>
         </div>
 
-        <div style="background: rgba(7, 94, 84, 0.05); border-left: 4px solid var(--color-primary); padding: 12px 16px; border-radius: var(--radius-sm); margin-bottom: 1.5rem; font-size: 13px; color: var(--color-dark-mid);">
+        <div style="background: rgba(97, 206, 112, 0.08); border-left: 4px solid var(--color-primary); padding: 12px 16px; border-radius: var(--radius-sm); margin-bottom: 1.5rem; font-size: 13px; color: var(--color-dark-mid);">
             <i class="fa-solid fa-shield-halved text-primary"></i> <strong>Regras de Segurança:</strong>
             <ul style="margin: 6px 0 0 18px; padding: 0; font-size: 12px; color: var(--color-mid);">
                 <li>É obrigatório informar sua <strong>senha atual</strong> para autorizar a modificação.</li>

@@ -1,7 +1,7 @@
 <div class="panel">
     <div style="margin-bottom: 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
         <div>
-            <h3 style="color: var(--color-dark); margin: 0; display: flex; align-items: center; gap: 10px;">
+            <h3 style="margin: 0; display: flex; align-items: center; gap: 10px;">
                 <i class="fa-solid fa-rotate-right" style="color: var(--color-primary);"></i> Registrar Novo Serviço / Refazer
             </h3>
             <p style="color: var(--color-mid); font-size: 13px; margin: 4px 0 0 0;">

@@ -2,7 +2,7 @@
 <div class="panel" style="margin-bottom: 1.5rem; border-left: 5px solid var(--color-primary); background: #ffffff;">
     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 10px;">
         <div>
-            <h3 style="color: var(--color-dark); margin: 0; display: flex; align-items: center; gap: 10px;">
+            <h3 style="margin: 0; display: flex; align-items: center; gap: 10px;">
                 <i class="fa-solid fa-calendar-check" style="color: var(--color-primary);"></i> Serviços Agendados para Hoje (<?= date('d/m/Y') ?>)
             </h3>
             <p style="color: var(--color-mid); font-size: 13px; margin: 4px 0 0 0;">
@@ -94,7 +94,7 @@
 <div class="panel">
     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 15px;">
         <div>
-            <h3 style="color: var(--color-dark); margin: 0;">Histórico Geral de Serviços</h3>
+            <h3 style="margin: 0;">Histórico Geral de Serviços</h3>
             <p style="color: var(--color-mid); font-size: 13px; margin: 4px 0 0 0;">Acompanhe o andamento de todos os atendimentos e laudos técnicos gerados.</p>
         </div>
         <?php if (!$isTecnico): ?>

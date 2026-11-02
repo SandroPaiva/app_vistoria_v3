@@ -1,7 +1,7 @@
 <div class="panel">
     <div style="margin-bottom: 1.5rem; display: flex; justify-content: space-between; align-items: center;">
         <div>
-            <h3 style="color: var(--color-dark); margin: 0;">Execução de Serviço</h3>
+            <h3 style="margin: 0;">Execução de Serviço</h3>
             <p style="color: var(--color-mid); font-size: 13px;">Veículo: <strong><?= htmlspecialchars($vistoria['fabricante'] . ' ' . $vistoria['modelo'] . ' - ' . $vistoria['placa']) ?></strong></p>
             <p style="color: var(--color-mid); font-size: 13px;">Item Alvo: <strong><?= htmlspecialchars($vistoria['tipo_reparo'] ?? 'Não especificado') ?> - <?= htmlspecialchars($vistoria['classificacao_vidro'] ?? '') ?></strong></p>
             <p style="color: var(--color-mid); font-size: 13px;">Cliente: <strong><?= htmlspecialchars($vistoria['nome_proprietario'] ?? 'Não informado') ?></strong><?= !empty($vistoria['telefone_proprietario']) ? ' | Tel: <strong>' . htmlspecialchars($vistoria['telefone_proprietario']) . '</strong>' : '' ?></p>
@@ -98,9 +98,9 @@
 </div>
 
 <!-- Modal de Assinatura -->
-<div id="signatureModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 9999; justify-content: center; align-items: center; flex-direction: column;">
+<div id="signatureModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(1, 51, 32, 0.9); z-index: 9999; justify-content: center; align-items: center; flex-direction: column;">
     <div style="background: white; padding: 20px; border-radius: 8px; width: 90%; max-width: 800px; text-align: center;">
-        <h3 style="margin-bottom: 10px; color: var(--color-dark);">Assinatura do Cliente</h3>
+        <h3 style="margin-bottom: 10px;">Assinatura do Cliente</h3>
         <p style="font-size: 12px; color: var(--color-mid); margin-bottom: 15px;">Por favor, assine no quadro abaixo (Gire o celular se necessário).</p>
         
         <div style="border: 2px dashed var(--color-border); background: #f9f9f9; touch-action: none; margin-bottom: 15px;">
@@ -116,9 +116,9 @@
 </div>
 
 <!-- Modal de Cancelamento -->
-<div id="cancelModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 9999; justify-content: center; align-items: center; padding: 15px;">
+<div id="cancelModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(3, 90, 56, 0.7); z-index: 9999; justify-content: center; align-items: center; padding: 15px;">
     <div style="background: white; padding: 25px; border-radius: 8px; width: 100%; max-width: 500px; box-shadow: var(--shadow-lg);">
-        <h3 style="margin: 0 0 10px 0; color: var(--color-dark); display: flex; align-items: center; gap: 10px;">
+        <h3 style="margin: 0 0 10px 0; display: flex; align-items: center; gap: 10px;">
             <i class="fa-solid fa-ban" style="color: var(--color-danger);"></i> Cancelar Serviço
         </h3>
         <p style="font-size: 13px; color: var(--color-mid); margin-bottom: 20px;">Por favor, informe o motivo do cancelamento deste serviço. Esta ação não poderá ser desfeita.</p>

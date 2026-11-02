@@ -6,7 +6,7 @@
         <div class="agenda-column">
             <div class="agenda-header">
                 <div>
-                    <h3 style="margin: 0; color: var(--color-primary-dark); font-size: 1.15rem; display: flex; align-items: center; gap: 8px;">
+                    <h3 style="margin: 0; font-size: 1.15rem; display: flex; align-items: center; gap: 8px;">
                         <i class="fa-solid fa-calendar-check text-primary"></i>
                         <span>Serviços Agendados</span>
                     </h3>
@@ -104,7 +104,7 @@
 
 <!-- Painel de Boas Vindas Padrão -->
 <div class="panel" id="welcome-panel" style="margin-top: 1.5rem;">
-    <h3 style="color: var(--color-primary-dark); margin-bottom: 0.75rem;">Bem-vindo ao Sistema de Serviços, <?= htmlspecialchars(explode(' ', $_SESSION['user_name'])[0]) ?>!</h3>
+    <h3 style="margin-bottom: 0.75rem;">Bem-vindo ao Sistema de Serviços, <?= htmlspecialchars(explode(' ', $_SESSION['user_name'])[0]) ?>!</h3>
     <p style="margin-bottom: 1rem; color: var(--color-mid);">Utilize o quadro superior para acompanhar os agendamentos por data no calendário interativo ou clique nos indicadores acima para detalhar o catálogo e serviços.</p>
     <div style="background: var(--color-surface); padding: 12px 16px; border-radius: var(--radius-md); border-left: 4px solid var(--color-primary); font-size: 13px;">
         <i class="fa-solid fa-info-circle text-primary"></i> <strong>Produtividade:</strong> Clique sobre qualquer dia do calendário para ver instantaneamente a escala de trabalho, veículos e técnicos programados para aquela data.
@@ -117,7 +117,7 @@
     <!-- Seção de Veículos Cadastrados -->
     <div id="section-veiculos" class="detail-section" style="display: none;">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 10px;">
-            <h3 style="margin: 0; color: var(--color-primary-dark);">Catálogo de Veículos</h3>
+            <h3 style="margin: 0;">Catálogo de Veículos</h3>
             <?php if (in_array($_SESSION['user_profile'], ['Administrador', 'Gerente', 'Supervisor'])): ?>
                 <a href="<?= BASE_URL ?>/veiculos/novo" class="btn btn-primary" style="padding: 10px 20px;"><i class="fa-solid fa-plus"></i> Novo Veículo</a>
             <?php endif; ?>
@@ -163,19 +163,19 @@
                         <td><?= htmlspecialchars($v['nome_proprietario'] ?? '-') ?></td>
                         <td>
                             <?php if (!empty($v['ativo'])): ?>
-                                <span class="badge badge-success">Ativo</span>
+                                <span class="status-circle status-active" title="Ativo" data-status="ativo"><i class="fa-solid fa-check"></i></span>
                             <?php else: ?>
-                                <span class="badge badge-danger">Inativo</span>
+                                <span class="status-circle status-inactive" title="Inativo" data-status="inativo"><i class="fa-solid fa-xmark"></i></span>
                             <?php endif; ?>
                         </td>
                         <td>
-                            <a href="<?= BASE_URL ?>/veiculos/visualizar/<?= $v['id'] ?>" class="btn btn-secondary" style="padding: 6px 12px; font-size: 11px;"><i class="fa-solid fa-search"></i> Visualizar</a>
+                            <a href="<?= BASE_URL ?>/veiculos/visualizar/<?= $v['id'] ?>" class="btn btn-secondary" style="padding: 6px 12px; font-size: 11px;" title="Histórico"><i class="fa-solid fa-eye"></i></a>
                             <?php if (in_array($_SESSION['user_profile'], ['Administrador', 'Gerente', 'Supervisor'])): ?>
-                                <a href="<?= BASE_URL ?>/veiculos/editar/<?= $v['id'] ?>" class="btn btn-primary" style="padding: 6px 12px; font-size: 11px;"><i class="fa-solid fa-edit"></i> Editar</a>
+                                <a href="<?= BASE_URL ?>/veiculos/editar/<?= $v['id'] ?>" class="btn btn-primary" style="padding: 6px 12px; font-size: 11px;" title="Editar"><i class="fa-solid fa-edit"></i></a>
                                 <?php if (!empty($v['ativo'])): ?>
-                                    <a href="<?= BASE_URL ?>/veiculos/desativar/<?= $v['id'] ?>" class="btn btn-danger" style="padding: 6px 12px; font-size: 11px;" onclick="return confirm('Deseja desativar este veículo?')"><i class="fa-solid fa-ban"></i> Desativar</a>
+                                    <a href="<?= BASE_URL ?>/veiculos/desativar/<?= $v['id'] ?>" class="btn btn-danger" style="padding: 6px 12px; font-size: 11px;" onclick="return confirm('Deseja desativar este veículo?')" title="Desativar"><i class="fa-solid fa-ban"></i></a>
                                 <?php else: ?>
-                                    <a href="<?= BASE_URL ?>/veiculos/ativar/<?= $v['id'] ?>" class="btn btn-success" style="padding: 6px 12px; font-size: 11px;" onclick="return confirm('Deseja reativar este veículo?')"><i class="fa-solid fa-check"></i> Reativar</a>
+                                    <a href="<?= BASE_URL ?>/veiculos/ativar/<?= $v['id'] ?>" class="btn btn-reativar" style="padding: 6px 12px; font-size: 11px;" onclick="return confirm('Deseja reativar este veículo?')" title="Reativar"><i class="fa-solid fa-check"></i> Reativar</a>
                                 <?php endif; ?>
                             <?php endif; ?>
                         </td>
@@ -189,7 +189,7 @@
     <!-- Seção de Serviços em Andamento -->
     <div id="section-andamento" class="detail-section" style="display: none;">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 10px;">
-            <h3 style="margin: 0; color: var(--color-warning);">Serviços Em Andamento</h3>
+            <h3 style="margin: 0;">Serviços Em Andamento</h3>
             <?php if (!$isTecnico): ?>
                 <a href="<?= BASE_URL ?>/vistorias/nova" class="btn btn-primary" style="padding: 10px 20px;"><i class="fa-solid fa-plus"></i> Iniciar Serviço</a>
             <?php endif; ?>
@@ -234,7 +234,7 @@
     <!-- Seção de Serviços Concluídos -->
     <div id="section-concluidas" class="detail-section" style="display: none;">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
-            <h3 style="margin: 0; color: var(--color-success);">Serviços Concluídos</h3>
+            <h3 style="margin: 0;">Serviços Concluídos</h3>
         </div>
         <div class="table-responsive">
             <table class="table">
@@ -276,7 +276,7 @@
     <!-- Seção de Serviços Cancelados -->
     <div id="section-canceladas" class="detail-section" style="display: none;">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
-            <h3 style="margin: 0; color: var(--color-danger);">Serviços Cancelados</h3>
+            <h3 style="margin: 0;">Serviços Cancelados</h3>
         </div>
         <div class="table-responsive">
             <table class="table">

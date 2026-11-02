@@ -207,14 +207,18 @@ document.addEventListener('DOMContentLoaded', function () {
                 // Checagem de status Ativo/Inativo
                 let matchesStatus = true;
                 if (hasStatusCol && statusFilter !== 'todos') {
-                    // Verifica badge de status ou texto
-                    const badges = Array.from(row.querySelectorAll('.badge, td'));
+                    // Verifica badge de status, status-circle ou texto
+                    const badges = Array.from(row.querySelectorAll('.badge, .status-circle, td'));
                     const isRowAtivo = badges.some(b => {
-                        const t = b.innerText.toLowerCase().trim();
+                        if (b.classList.contains('status-active')) return true;
+                        if (b.getAttribute('data-status') === 'ativo') return true;
+                        const t = (b.innerText || b.getAttribute('title') || '').toLowerCase().trim();
                         return t === 'ativo' || t === 'em andamento' || t === 'agendado';
                     });
                     const isRowInativo = badges.some(b => {
-                        const t = b.innerText.toLowerCase().trim();
+                        if (b.classList.contains('status-inactive')) return true;
+                        if (b.getAttribute('data-status') === 'inativo') return true;
+                        const t = (b.innerText || b.getAttribute('title') || '').toLowerCase().trim();
                         return t === 'inativo' || t === 'cancelado';
                     });
 

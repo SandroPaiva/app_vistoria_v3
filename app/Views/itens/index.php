@@ -1,7 +1,7 @@
 <div class="panel">
     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 15px;">
         <div>
-            <h3 style="color: var(--color-dark); margin: 0;">Catálogo de Itens de Serviço</h3>
+            <h3 style="margin: 0;">Catálogo de Itens de Serviço</h3>
             <p style="color: var(--color-mid); font-size: 13px; margin: 4px 0 0 0;">Catálogo oficial de vidros e tipos de reparo oferecidos pela Pilkington.</p>
         </div>
         <a href="<?= BASE_URL ?>/itens/novo" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Novo Item</a>
@@ -35,9 +35,9 @@
                     <td><?= htmlspecialchars($i['especificacao_outros'] ?? '-') ?></td>
                     <td>
                         <?php if ($i['ativo'] == 1): ?>
-                            <span class="badge" style="background: var(--color-success);"><i class="fa-solid fa-check"></i> Ativo</span>
+                            <span class="status-circle status-active" title="Ativo" data-status="ativo"><i class="fa-solid fa-check"></i></span>
                         <?php else: ?>
-                            <span class="badge" style="background: var(--color-mid);"><i class="fa-solid fa-xmark"></i> Inativo</span>
+                            <span class="status-circle status-inactive" title="Inativo" data-status="inativo"><i class="fa-solid fa-xmark"></i></span>
                         <?php endif; ?>
                     </td>
                     <td>
@@ -45,7 +45,7 @@
                         <?php if ($i['ativo'] == 1): ?>
                             <a href="<?= BASE_URL ?>/itens/desativar/<?= $i['id'] ?>" class="btn btn-danger" style="padding: 4px 10px; font-size: 11px;" onclick="return confirm('Deseja realmente desativar este item de serviço?')" title="Desativar"><i class="fa-solid fa-trash"></i></a>
                         <?php else: ?>
-                            <a href="<?= BASE_URL ?>/itens/ativar/<?= $i['id'] ?>" class="btn btn-success" style="padding: 4px 10px; font-size: 11px;" onclick="return confirm('Deseja reativar este item?')" title="Reativar"><i class="fa-solid fa-check"></i></a>
+                            <a href="<?= BASE_URL ?>/itens/ativar/<?= $i['id'] ?>" class="btn btn-reativar" style="padding: 4px 10px; font-size: 11px;" onclick="return confirm('Deseja reativar este item?')" title="Reativar"><i class="fa-solid fa-check"></i> Reativar</a>
                         <?php endif; ?>
                     </td>
                 </tr>

@@ -7,15 +7,15 @@
                 <i class="fa-solid fa-user-tie"></i>
             </div>
             <div>
-                <h2 style="margin: 0; font-size: 20px; color: var(--color-primary-dark);"><?= htmlspecialchars($user['nome_completo']) ?></h2>
+                <h2 style="margin: 0; font-size: 20px;"><?= htmlspecialchars($user['nome_completo']) ?></h2>
                 <div style="display: flex; align-items: center; gap: 8px; margin-top: 4px;">
                     <span class="badge" style="background: var(--color-primary-dark); font-size: 11px;">
                         <i class="fa-solid fa-shield-halved"></i> Perfil: <?= htmlspecialchars($user['perfil_acesso']) ?>
                     </span>
                     <?php if (!empty($user['ativo'])): ?>
-                        <span class="badge badge-success"><i class="fa-solid fa-check"></i> Conta Ativa</span>
+                        <span class="status-circle status-active" title="Ativo" data-status="ativo"><i class="fa-solid fa-check"></i></span>
                     <?php else: ?>
-                        <span class="badge badge-danger"><i class="fa-solid fa-ban"></i> Inativo</span>
+                        <span class="status-circle status-inactive" title="Inativo" data-status="inativo"><i class="fa-solid fa-xmark"></i></span>
                     <?php endif; ?>
                 </div>
             </div>
@@ -31,7 +31,7 @@
         
         <!-- Formulário: Alterar Nome Completo -->
         <div class="panel">
-            <h3 style="margin-top: 0; margin-bottom: 1rem; color: var(--color-dark); font-size: 16px; border-bottom: 1px solid var(--color-border); padding-bottom: 10px; display: flex; align-items: center; gap: 8px;">
+            <h3 style="margin-top: 0; margin-bottom: 1rem; font-size: 16px; border-bottom: 1px solid var(--color-border); padding-bottom: 10px; display: flex; align-items: center; gap: 8px;">
                 <i class="fa-solid fa-user-pen text-primary"></i> Alterar Meu Nome
             </h3>
             <p style="font-size: 13px; color: var(--color-mid); margin-bottom: 1.25rem;">
@@ -54,7 +54,7 @@
 
         <!-- Painel: Informações Cadastrais Completas -->
         <div class="panel">
-            <h3 style="margin-top: 0; margin-bottom: 1rem; color: var(--color-dark); font-size: 16px; border-bottom: 1px solid var(--color-border); padding-bottom: 10px; display: flex; align-items: center; gap: 8px;">
+            <h3 style="margin-top: 0; margin-bottom: 1rem; font-size: 16px; border-bottom: 1px solid var(--color-border); padding-bottom: 10px; display: flex; align-items: center; gap: 8px;">
                 <i class="fa-solid fa-id-card text-primary"></i> Dados da Conta
             </h3>
 
@@ -79,7 +79,7 @@
                 <div style="display: flex; justify-content: space-between; border-bottom: 1px dashed var(--color-border); padding-bottom: 8px;">
                     <span style="color: var(--color-mid); font-weight: 500;">Status do Usuário:</span>
                     <span>
-                        <?= !empty($user['ativo']) ? '<span class="text-success font-weight-bold"><i class="fa-solid fa-circle-check"></i> Ativo</span>' : '<span class="text-danger font-weight-bold"><i class="fa-solid fa-circle-xmark"></i> Inativo</span>' ?>
+                        <?= !empty($user['ativo']) ? '<span class="status-circle status-active" title="Ativo"><i class="fa-solid fa-check"></i></span>' : '<span class="status-circle status-inactive" title="Inativo"><i class="fa-solid fa-xmark"></i></span>' ?>
                     </span>
                 </div>
 

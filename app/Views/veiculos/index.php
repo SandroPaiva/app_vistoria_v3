@@ -1,7 +1,7 @@
 <div class="panel">
     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 15px;">
         <div>
-            <h3 style="color: var(--color-dark); margin: 0;">Veículos Cadastrados</h3>
+            <h3 style="margin: 0;">Veículos Cadastrados</h3>
             <p style="color: var(--color-mid); font-size: 13px; margin: 4px 0 0 0;">Gestão da frota, agendamentos e histórico de atendimentos veiculares.</p>
         </div>
         <a href="<?= BASE_URL ?>/veiculos/novo" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Novo Veículo</a>
@@ -65,22 +65,22 @@
                     </td>
                     <td>
                         <?php if ($v['ativo'] == 1): ?>
-                            <span class="badge" style="background: var(--color-success);"><i class="fa-solid fa-check"></i> Ativo</span>
+                            <span class="status-circle status-active" title="Ativo" data-status="ativo"><i class="fa-solid fa-check"></i></span>
                         <?php else: ?>
-                            <span class="badge" style="background: var(--color-mid);"><i class="fa-solid fa-xmark"></i> Inativo</span>
+                            <span class="status-circle status-inactive" title="Inativo" data-status="inativo"><i class="fa-solid fa-xmark"></i></span>
                         <?php endif; ?>
                     </td>
                     <td>
-                        <div style="display: flex; gap: 5px; flex-wrap: wrap;">
-                            <!-- Botão de Visualização / Histórico -->
-                            <a href="<?= BASE_URL ?>/veiculos/visualizar/<?= $v['id'] ?>" class="btn btn-secondary" style="padding: 4px 8px; font-size: 11px;" title="Ver Detalhes e Histórico de Atendimentos">
-                                <i class="fa-solid fa-eye"></i> Histórico
+                        <div style="display: flex; gap: 5px; flex-wrap: wrap; align-items: center;">
+                            <!-- Botão de Histórico (Somente ícone de olho) -->
+                            <a href="<?= BASE_URL ?>/veiculos/visualizar/<?= $v['id'] ?>" class="btn btn-secondary" style="padding: 4px 8px; font-size: 11px;" title="Histórico">
+                                <i class="fa-solid fa-eye"></i>
                             </a>
 
-                            <!-- Botão Novo Serviço / Refazer para veículos que já tiveram serviços -->
+                            <!-- Botão Novo Serviço (Escrito apenas "Novo") -->
                             <?php if (!empty($v['total_servicos']) && $v['total_servicos'] > 0): ?>
-                                <a href="<?= BASE_URL ?>/veiculos/novo-servico/<?= $v['id'] ?>" class="btn btn-primary" style="padding: 4px 8px; font-size: 11px; background: var(--color-primary-light);" title="Novo Serviço / Refazer (Gera Histórico)">
-                                    <i class="fa-solid fa-plus-circle"></i> Novo Serviço
+                                <a href="<?= BASE_URL ?>/veiculos/novo-servico/<?= $v['id'] ?>" class="btn btn-primary" style="padding: 4px 8px; font-size: 11px;" title="Novo Serviço">
+                                    <i class="fa-solid fa-plus"></i> Novo
                                 </a>
                             <?php endif; ?>
 
@@ -89,7 +89,7 @@
                             <?php if ($v['ativo'] == 1): ?>
                                 <a href="<?= BASE_URL ?>/veiculos/desativar/<?= $v['id'] ?>" class="btn btn-danger" style="padding: 4px 8px; font-size: 11px;" onclick="return confirm('Deseja realmente desativar este veículo?')" title="Desativar"><i class="fa-solid fa-trash"></i></a>
                             <?php else: ?>
-                                <a href="<?= BASE_URL ?>/veiculos/ativar/<?= $v['id'] ?>" class="btn btn-success" style="padding: 4px 8px; font-size: 11px;" onclick="return confirm('Deseja reativar este veículo?')" title="Reativar"><i class="fa-solid fa-check"></i></a>
+                                <a href="<?= BASE_URL ?>/veiculos/ativar/<?= $v['id'] ?>" class="btn btn-reativar" style="padding: 4px 8px; font-size: 11px;" onclick="return confirm('Deseja reativar este veículo?')" title="Reativar"><i class="fa-solid fa-check"></i> Reativar</a>
                             <?php endif; ?>
                         </div>
                     </td>
