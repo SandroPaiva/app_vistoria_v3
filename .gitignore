@@ -1,2 +1,5 @@
 .env
 *.log
+public/assets/img/*.jpg
+public/assets/img/*.png
+public/assets/img/*.gif
